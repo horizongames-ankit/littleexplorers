@@ -12,11 +12,11 @@ workflows:
       - name: Build IPA
         script: |
           cd xcode_project
-          xcodebuild -workspace LittleExplorers.xcworkspace \
-            -scheme LittleExplorers \
+          xcodebuild -project Unity-iPhone.xcodeproj \
+            -scheme Unity-iPhone \
             -configuration Release \
-            -archivePath build/LittleExplorers.xcarchive archive
+            -archivePath build/Unity-iPhone.xcarchive archive
           xcodebuild -exportArchive \
-            -archivePath build/LittleExplorers.xcarchive \
-            -exportOptionsPlist ExportOptions.plist \
+            -archivePath build/Unity-iPhone.xcarchive \
+            -exportOptionsPlist <(echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?><plist version=\"1.0\"><dict><key>method</key><string>app-store</string></dict></plist>") \
             -exportPath build
