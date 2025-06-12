@@ -16,7 +16,7 @@ workflows:
             -scheme Unity-iPhone \
             -configuration Release \
             -archivePath build/Unity-iPhone.xcarchive \
-            -allowProvisioningUpdates archive
+            -allowProvisioningUpdates clean archive
           xcodebuild -exportArchive \
             -archivePath build/Unity-iPhone.xcarchive \
             -exportOptionsPlist <(echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?><plist version=\"1.0\"><dict><key>method</key><string>app-store</string></dict></plist>") \
