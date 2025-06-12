@@ -7,7 +7,7 @@ workflows:
     scripts:
       - name: Download and unpack Xcode ZIP
         script: |
-          curl -L "https://www.dropbox.com/scl/fi/xewf4bjrps2e2fzeeuzma/Little-Explorers-iOS.zip?rlkey=dfuo9jyhfmh7oxfszwy00ie1c&st=8x539tx5&dl=1" -o project.zip
+          curl -L "https://www.dropbox.com/scl/fi/n6ey2pqkg03s88jrkneyi/Little-Explorers-iOS.zip?rlkey=a9klhywvckroy1vr2hhjm4uwf&st=7s4wj5s8&dl=1" -o project.zip
           unzip project.zip -d xcode_project
       - name: Build IPA
         script: |
@@ -19,22 +19,5 @@ workflows:
             -allowProvisioningUpdates archive
           xcodebuild -exportArchive \
             -archivePath build/Unity-iPhone.xcarchive \
-            -exportOptionsPlist <(echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
-            <plist version=\"1.0\">
-              <dict>
-                <key>method</key>
-                <string>app-store</string>
-                <key>provisioningProfiles</key>
-                <dict>
-                  <key>com.horizongames.littleexplorers</key>
-                  <string>LittleExplorers_AppStore_Profile</string>
-                </dict>
-                <key>signingStyle</key>
-                <string>manual</string>
-                <key>teamID</key>
-                <string>ZJUXC3QL59</string>
-                <key>compileBitcode</key>
-                <false/>
-              </dict>
-            </plist>") \
+            -exportOptionsPlist <(echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?><plist version=\"1.0\"><dict><key>method</key><string>app-store</string></dict></plist>") \
             -exportPath build
