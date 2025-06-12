@@ -5,8 +5,7 @@ workflows:
       ios_signing:
         distribution_certificate:
           keychain_path: Certificates/distribution.p12
-          certificate_password: Encrypted(ENTER_YOUR_PASSWORD_HERE)
-        provisioning_profile_path: Profiles/your_app_profile.mobileprovision
+        provisioning_profile_path: Profiles/LittleExplorers_AppStore_Profile.mobileprovision
       groups:
         - app_store_credentials
     scripts:
@@ -17,12 +16,12 @@ workflows:
       - name: Build IPA
         script: |
           cd xcode_project
-          # If your project has xcworkspace, use this line:
+          # If your project has xcworkspace (CocoaPods), use this line:
           xcodebuild -workspace LittleExplorers.xcworkspace \
             -scheme LittleExplorers \
             -configuration Release \
             -archivePath build/LittleExplorers.xcarchive archive
-          # If your project has only xcodeproj, use this line instead:
+          # If your project only has xcodeproj, comment the above and uncomment this:
           # xcodebuild -project LittleExplorers.xcodeproj \
           #   -scheme LittleExplorers \
           #   -configuration Release \
