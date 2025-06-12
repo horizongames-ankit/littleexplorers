@@ -1,0 +1,36 @@
+workflows:
+  ios-release-workflow:
+    name: iOS Release Workflow
+    environment:
+      ios_signing:
+        distribution_certificate:
+          keychain_path: Certificates/distribution.p12
+          certificate_password: Encrypted(ENTER_YOUR_PASSWORD_HERE)
+        provisioning_profile_path: Profiles/your_app_profile.mobileprovision
+      groups:
+        - app_store_credentials
+    scripts:
+      - name: Download and unpack Xcode ZIP
+        script: |
+          curl -L "https://www.dropbox.com/scl/fi/gm9xi1adl3z6xghlucrm7/Little-Explorers.zip?rlkey=t4qcrpnyoqoc4vhfdnpkcz3rb&st=pg8jo5io&dl=1" -o project.zip
+          unzip project.zip -d xcode_project
+      - name: Build IPA
+        script: |
+          cd xcode_project
+          # If your project has xcworkspace, use this line:
+          xcodebuild -workspace LittleExplorers.xcworkspace \
+            -scheme LittleExplorers \
+            -configuration Release \
+            -archivePath build/LittleExplorers.xcarchive archive
+          # If your project has only xcodeproj, use this line instead:
+          # xcodebuild -project LittleExplorers.xcodeproj \
+          #   -scheme LittleExplorers \
+          #   -configuration Release \
+          #   -archivePath build/LittleExplorers.xcarchive archive
+          xcodebuild -exportArchive \
+            -archivePath build/LittleExplorers.xcarchive \
+            -exportOptionsPlist ExportOptions.plist \
+            -exportPath build
+    publishing:
+      app_store_connect:
+        api_key: $APP_STORE_CONNECT_API_KEY
