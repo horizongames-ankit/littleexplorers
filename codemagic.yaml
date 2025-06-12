@@ -7,7 +7,7 @@ workflows:
     scripts:
       - name: Download and unpack Xcode ZIP
         script: |
-          curl -L "https://www.dropbox.com/scl/fi/gm9xi1adl3z6xghlucrm7/Little-Explorers.zip?rlkey=t4qcrpnyoqoc4vhfdnpkcz3rb&st=pg8jo5io&dl=1" -o project.zip
+          curl -L "YOUR_NEW_DROPBOX_LINK?dl=1" -o project.zip
           unzip project.zip -d xcode_project
       - name: Build IPA
         script: |
