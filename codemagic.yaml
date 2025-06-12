@@ -20,5 +20,3 @@ workflows:
             -archivePath build/LittleExplorers.xcarchive \
             -exportOptionsPlist ExportOptions.plist \
             -exportPath build
-    publishing:
-      app_store_connect: {}
